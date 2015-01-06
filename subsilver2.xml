@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		<title lang="en"><![CDATA[Ad Management]]></title>
+		<description lang="en"><![CDATA[Displays ads in postings, you can choose the forums where the ads will be shown.]]></description>
+		<author-group>
+
+			<author>
+				<realname><![CDATA[Tobias Schäfer]]></realname>
+				<email><![CDATA[tobi.schaefer@gmail.com]]></email>
+				<username><![CDATA[tas2580]]></username>
+				<homepage><![CDATA[http://tas2580.net]]></homepage>
+			</author>
+		</author-group>
+		<mod-version>1.0.1</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>400</time>
+			<target-version>3.0.4</target-version>
+		</installation>
+		<link-group>
+			<link type="parent" lang="en-gb" href="install.xml">Installation Instructions</link>
+		</link-group>
+
+	</header>
+	<action-group>
+		<open src="styles/subsilver2/template/overall_header.html">
+			<edit>
+				<find><![CDATA[<!-- INCLUDE breadcrumbs.html -->]]></find>
+				<action type="after-add"><![CDATA[	<!-- IF AD_CODE5 -->
+	<br /><div style="text-align:center;">{AD_CODE5}</div>
+	<!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/subsilver2/template/overall_footer.html">
+			<edit>
+				<find><![CDATA[<div id="wrapfooter">]]></find>
+					<action type="before-add"><![CDATA[	<!-- IF AD_CODE6 -->
+	<br /><div style="text-align:center;">{AD_CODE6}</div><br />
+	<!-- ENDIF -->]]></action>
+				</edit>
+			</open>
+
+			<open src="styles/subsilver2/template/viewtopic_body.html">
+				<edit>
+					<find><![CDATA[<!-- INCLUDE overall_header.html -->]]></find>
+					<action type="after-add"><![CDATA[<div style="text-align:center;">{AD_CODE3}</div>]]></action>
+
+					<find><![CDATA[	</table>
+	<!-- END postrow -->]]></find>
+
+
+				<action type="replace-with"><![CDATA[	<!-- IF AD_CODE2 -->
+		<tr class="row1">
+			<td colspan="2" style="align:center;">{AD_CODE2}</td>
+		</tr>
+		<!-- ENDIF -->
+		<!-- IF postrow.S_FIRST_ROW == 2 -->
+		<!-- IF AD_CODE1 and not AD_CODE2 -->
+		<tr class="row1">
+			<td colspan="2" style="align:center;">{AD_CODE1}</td>
+		</tr>
+		<!-- ENDIF -->
+		<!-- ENDIF -->
+		<!-- END postrow -->
+	</table>
+
+	<!-- IF AD_CODE4 -->
+	<div style="align:center;">{AD_CODE4}</div>
+	<!-- ENDIF -->]]></action>
+
+		</edit>
+    </open>
+	</action-group>
+</mod>
